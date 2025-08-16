@@ -9,9 +9,10 @@ public class UIBinder : MonoBehaviour
     public TMP_Text cooldownText;
     public TMP_Text goldText, gemsText;
 
+
     public void SetButtonInteractable(bool v) => spinButton.interactable = v;
     public void SetCooldown(string s) => cooldownText.text = s;
-    public void SetWallet(long gold, long gems)
+    public void SetWallet(float gold, float gems)
     {
         goldText.text = gold.ToString();
         gemsText.text = gems.ToString();

@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Rewards
   m_EditorClassIdentifier: 
   rewards:
-  - currency: 1
-    amount: 10
-    display: {fileID: 7983272017943786117, guid: de0d83734c6201c48aacfa1e1ade4cd5, type: 3}
   - currency: 0
     amount: 0.05
     display: {fileID: 5071175732447116851, guid: b385210eb666f074882ae3bf46e8dbb7, type: 3}
@@ -37,3 +34,6 @@ MonoBehaviour:
   - currency: 0
     amount: 0.5
     display: {fileID: 2076549950175000042, guid: c3367cca461fd054e813726819194760, type: 3}
+  - currency: 1
+    amount: 10
+    display: {fileID: 7983272017943786117, guid: de0d83734c6201c48aacfa1e1ade4cd5, type: 3}

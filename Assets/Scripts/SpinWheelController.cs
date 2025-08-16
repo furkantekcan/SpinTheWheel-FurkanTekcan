@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -32,9 +34,40 @@ public class SpinWheelController : MonoBehaviour
         ui.spinButton.onClick.AddListener(OnSpinPressed);
     }
 
+    private void Start()
+    {
+        StartCoroutine(WaitUntilUserData());
+
+        
+    }
+    IEnumerator WaitUntilUserData()
+    {
+        yield return new WaitUntil(() => FirebaseInitializer.Instance.userData != null);
+
+        var userData = FirebaseInitializer.Instance.userData;
+
+        cooldownMinutes = 10;
+        nextAvailableUtc = userData.lastSpinTime.ToDateTime().AddMinutes((double)cooldownMinutes);
+
+        Debug.Log("nextAvailableUtc: " + nextAvailableUtc);
+
+        ui.spinButton.interactable = Timestamp.GetCurrentTimestamp().ToDateTime() >= nextAvailableUtc;
+
+        if (Timestamp.GetCurrentTimestamp().ToDateTime() < nextAvailableUtc)
+        {
+            Debug.Log("Still waiting for coundown");
+            countdownCo = StartCoroutine(CooldownCountdown());
+        }
+        else
+        {
+            ui.SetCooldown("READY!");
+        }
+    }
+
     private void OnDisable()
     {
         ui.spinButton.onClick.RemoveAllListeners();
+
     }
 
     public async void OnSpinPressed()
@@ -78,6 +111,10 @@ public class SpinWheelController : MonoBehaviour
 
         Debug.Log("REWARD: " + reward.currency.ToString() + " Amount: " + reward.amount.ToString());
 
+        FirebaseInitializer.Instance.OnRewardUpdate?.Invoke(reward);
+        
+        await RefreshUserState();
+
         ui.HighLighReward(reward.display);
         
         nextAvailableUtc = System.DateTime.UtcNow.AddMinutes((double)cooldownMinutes);
@@ -89,6 +126,36 @@ public class SpinWheelController : MonoBehaviour
 
         spinning = false;
         ui.SetButtonInteractable(false); 
+    }
+
+    public async Task RefreshUserState()
+    {
+        var uid = FirebaseInitializer.Instance.User.UserId;
+
+        await FirebaseInitializer.Instance.GetUserData();
+
+        var userData = FirebaseInitializer.Instance.userData;
+
+        spinCount = userData.spinCount;
+        cooldownMinutes = 10;
+        nextAvailableUtc = userData.lastSpinTime.ToDateTime().AddMinutes((double)cooldownMinutes);
+
+        if (countdownCo != null) StopCoroutine(countdownCo);
+        countdownCo = StartCoroutine(CooldownCountdown());
+
+        // Buton state
+        bool canSpin = Timestamp.GetCurrentTimestamp().ToDateTime() >= nextAvailableUtc;
+        ui.SetButtonInteractable(canSpin);
+
+        if (!canSpin)
+        {
+            if (countdownCo != null) StopCoroutine(countdownCo);
+            countdownCo = StartCoroutine(CooldownCountdown());
+        }
+        else
+        {
+            ui.SetCooldown("Ready");
+        }
     }
 
     IEnumerator CooldownCountdown()
@@ -163,5 +230,4 @@ public class SpinWheelController : MonoBehaviour
             throw new System.Exception("Random API unexpected: " + json);
         }
     }
-
 }
