@@ -46,7 +46,7 @@ public class SpinWheelController : MonoBehaviour
 
         var userData = FirebaseInitializer.Instance.userData;
 
-        cooldownMinutes = 10;
+        cooldownMinutes = 10 + userData.spinCount * 5;
         nextAvailableUtc = userData.lastSpinTime.ToDateTime().AddMinutes((double)cooldownMinutes);
 
         Debug.Log("nextAvailableUtc: " + nextAvailableUtc);

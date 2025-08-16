@@ -169,6 +169,11 @@ public class FirebaseInitializer : MonoBehaviour
     {
         userData.gems += reward.currency == RewardType.Gem ? reward.amount : 0;
         userData.golds += reward.currency == RewardType.Gold ? reward.amount : 0;
+        userData.spinCount += 1;
+        if (userData.spinCount > 10)
+        {
+            userData.spinCount = 0;
+        }
 
         _ =SetUserData();
     }
