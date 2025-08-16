@@ -23,15 +23,24 @@ Implements asynchronous logic, cooldown mechanics, and external random API integ
 ## 📂 Setup Instructions
 1. Clone the repository:  
    git clone https://github.com/yourusername/SpinTheWheel-[NameSurname].git
+2.If Git LFS is not installed, install it:
+```
+git lfs install
+```
+3.To pull large files after cloning the repository:
+```
+git lfs pull
+```
+Otherwise, some necessary data files may be missing. 
 
 ### API Manipulation/Predictability
 
--Risk: The user may attempt to influence the outcome by bypassing the client and making requests directly to the randomness API.
+-**Risk**: The user may attempt to influence the outcome by bypassing the client and making requests directly to the randomness API.
 
--Solution: Randomness calculations should be performed server-side (e.g., Firebase Cloud Functions) whenever possible. API calls made through the client are vulnerable to manipulation.
+-**Solution**: Randomness calculations should be performed server-side (e.g., Firebase Cloud Functions) whenever possible. API calls made through the client are vulnerable to manipulation.
 
 ### Cooldown Bypass
 
--Risk: The player can reset the cooldown by changing their device's clock.
+-**Risk**: The player can reset the cooldown by changing their device's clock.
 
--Solution: Cooldown information is stored in Firestore, and validation is performed based on server time rather than device time.
+-**Solution**: Cooldown information is stored in Firestore, and validation is performed based on server time rather than device time.
