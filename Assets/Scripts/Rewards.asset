@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c43bb4149a90a438b2c4a271fc7a71, type: 3}
+  m_Name: Rewards
+  m_EditorClassIdentifier: 
+  rewards:
+  - currency: 1
+    amount: 10
+    display: {fileID: 7983272017943786117, guid: de0d83734c6201c48aacfa1e1ade4cd5, type: 3}
+  - currency: 0
+    amount: 0.05
+    display: {fileID: 5071175732447116851, guid: b385210eb666f074882ae3bf46e8dbb7, type: 3}
+  - currency: 1
+    amount: 50
+    display: {fileID: 3875266774237112635, guid: 5370cc8410ecc144f9eee6a0f3dadff8, type: 3}
+  - currency: 0
+    amount: 0.05
+    display: {fileID: 5071175732447116851, guid: b385210eb666f074882ae3bf46e8dbb7, type: 3}
+  - currency: 1
+    amount: 100
+    display: {fileID: 8629148938652858580, guid: 9befc57eba62e4546bf7a7daa588597d, type: 3}
+  - currency: 0
+    amount: 0.1
+    display: {fileID: 8988708884078992526, guid: 9af77bd942ad5ea43a4b5ea6d0d599cd, type: 3}
+  - currency: 1
+    amount: 200
+    display: {fileID: 8433473255826761773, guid: 94c21a2149499154a86c5518fad2cefa, type: 3}
+  - currency: 0
+    amount: 0.5
+    display: {fileID: 2076549950175000042, guid: c3367cca461fd054e813726819194760, type: 3}
