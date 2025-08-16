@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingScreen: {fileID: 2052760190}
   ui: {fileID: 961302302}
+  firstLogin: 0
 --- !u!4 &245833034
 Transform:
   m_ObjectHideFlags: 0
@@ -448,11 +449,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 8903e6cefd5b84b448a81fd3633a3e26, type: 2}
     - target: {fileID: 4700932588573810184, guid: 814c1b211fab4804bb4cd90b88589e5a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.64934313
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4700932588573810184, guid: 814c1b211fab4804bb4cd90b88589e5a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.76049554
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5398737793058361824, guid: 814c1b211fab4804bb4cd90b88589e5a, type: 3}
       propertyPath: m_Name
