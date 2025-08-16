@@ -23,7 +23,7 @@ Implements asynchronous logic, cooldown mechanics, and external random API integ
 ## 📂 Setup Instructions
 1. Clone the repository:  
    git clone https://github.com/yourusername/SpinTheWheel-[NameSurname].git
-2.If Git LFS is not installed, install it:
+2. If Git LFS is not installed, install it:
 ```
 git lfs install
 ```
