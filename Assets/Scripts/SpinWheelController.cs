@@ -32,17 +32,17 @@ public class SpinWheelController : MonoBehaviour
     private void Awake()
     {
         ui.spinButton.onClick.AddListener(OnSpinPressed);
+        ui.cooldownText.text = " ";
     }
 
     private void Start()
     {
-        StartCoroutine(WaitUntilUserData());
-
-        
+        FirebaseInitializer.Instance.OnUserData += OnUserData;
     }
-    IEnumerator WaitUntilUserData()
+
+    private void OnUserData()
     {
-        yield return new WaitUntil(() => FirebaseInitializer.Instance.userData != null);
+        if (FirebaseInitializer.Instance.firstLogin) return;
 
         var userData = FirebaseInitializer.Instance.userData;
 
@@ -67,6 +67,7 @@ public class SpinWheelController : MonoBehaviour
     private void OnDisable()
     {
         ui.spinButton.onClick.RemoveAllListeners();
+        FirebaseInitializer.Instance.OnUserData -= OnUserData;
 
     }
 
@@ -100,6 +101,7 @@ public class SpinWheelController : MonoBehaviour
         else
         {
             resultIndex = apiTask.Result % segmentCount;
+            Debug.Log(resultIndex);
         }
 
         resultArrived = true;
@@ -185,6 +187,7 @@ public class SpinWheelController : MonoBehaviour
         float currentMod = Mathf.Repeat(fromAngle, 360f);
 
         float delta = Mathf.Repeat(targetMod - currentMod, 360f);
+
         if (delta < 1f) delta += 360f; 
 
         float final = fromAngle + delta + extraRotations * 360f;

@@ -19,8 +19,11 @@ public class FirebaseInitializer : MonoBehaviour
     public UserData userData;
 
     public Action<Reward> OnRewardUpdate;
+    public Action OnUserData;
 
     public UIBinder ui;
+
+    public bool firstLogin = false;
 
     void Awake()
     {
@@ -91,6 +94,7 @@ public class FirebaseInitializer : MonoBehaviour
         }
         catch (Exception)
         {
+            firstLogin = true;
 
             await SetUserData();
         }
@@ -155,6 +159,8 @@ public class FirebaseInitializer : MonoBehaviour
         else
         {
             Debug.Log($"Document {snapshot.Id} does not exist. Creating new.");
+            firstLogin = true;
+
             await SetUserData();
         }
     }
